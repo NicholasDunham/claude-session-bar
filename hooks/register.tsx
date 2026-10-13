@@ -211,7 +211,7 @@ export const register: Register = on => {
           </Box>
           <Box width={NOTE_CELLS} flexShrink={0} overflow="hidden">
             {m.note !== null && (
-              <Text color="subtle" wrap="truncate-end">
+              <Text color="inactive" wrap="truncate-end">
                 {m.note}
               </Text>
             )}
@@ -221,6 +221,8 @@ export const register: Register = on => {
     }
     const meters = meterData.map(meter)
 
+    // Secondary text is the theme's "inactive" grey, which stays readable;
+    // "subtle" is for decoration only (empty bar cells, separators).
     // Secondary row: where and which model on the left; what changed, what it
     // cost and how well the cache is doing on the right.
     const where = [
@@ -232,12 +234,12 @@ export const register: Register = on => {
             <Text color="success">{snap.branch}</Text>
           </Text>
         )}
-        {snap.worktree !== null && <Text color="subtle"> (wt: {snap.worktree})</Text>}
+        {snap.worktree !== null && <Text color="inactive"> (wt: {snap.worktree})</Text>}
       </Text>,
       <Text key="model">
         <Text color="claude">{snap.model}</Text>
         {lvl !== null && <Text color="warning">/{lvl}</Text>}
-        {snap.contextWindow !== null && <Text color="subtle"> ({human(snap.contextWindow)})</Text>}
+        {snap.contextWindow !== null && <Text color="inactive"> ({human(snap.contextWindow)})</Text>}
       </Text>,
     ]
     const spend = [
@@ -247,13 +249,13 @@ export const register: Register = on => {
         </Text>
       ),
       snap.costUsd !== null && (
-        <Text key="cost" color="subtle">
+        <Text key="cost" color="inactive">
           ${snap.costUsd.toFixed(2)}
         </Text>
       ),
       ratio !== null && (
         <Text key="hit">
-          <Text color="subtle">cache </Text>
+          <Text color="inactive">cache </Text>
           <Text color={hitColor(ratio)}>{Math.round(ratio * 100)}%</Text>
         </Text>
       ),

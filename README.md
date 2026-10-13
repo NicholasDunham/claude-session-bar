@@ -9,7 +9,13 @@ Unlike a [status line](https://docs.claude.com/en/docs/claude-code/statusline),
 which only appears in the terminal, the band draws in **both the terminal and
 the Claude desktop app's Code tab**, from the same code.
 
+**In the desktop app:**
+
 ![The session bar in the Claude desktop app: context, 5h and 7d meters on the first row; repo, branch, model and effort on the left of the second row, with lines changed, cost and cache hit rate on the right](docs/desktop.png)
+
+**In the terminal:**
+
+![The session bar in a terminal session of Claude Code, above the prompt: the same meters drawn with block characters, and the same details row](docs/terminal.png)
 
 > [!NOTE]
 > Mods are an **early-access** Claude Code feature, and their API may change
@@ -31,7 +37,8 @@ the Claude desktop app's Code tab**, from the same code.
 Each bar turns from green to amber at 50% and to red at 80%. On a wide window
 the meters sit side by side in equal columns; on a narrow one they stack.
 In the terminal the bars are block characters; in the desktop app they're
-drawn as SVG.
+drawn as SVG. In the terminal, Claude Code adds a `[-]` control at the right
+of the band that collapses it; the desktop app has no equivalent.
 
 **Details** (the second row):
 
