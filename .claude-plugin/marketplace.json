@@ -1,0 +1,15 @@
+{
+  "name": "claude-session-bar",
+  "description": "A Claude Code mod: a session status band for the terminal and the desktop app",
+  "owner": {
+    "name": "Nicholas Dunham",
+    "url": "https://github.com/NicholasDunham"
+  },
+  "plugins": [
+    {
+      "name": "session-bar",
+      "source": "./",
+      "description": "A session status band above the prompt (context, 5h/7d limits, repo, model, cost, cache) that works in the terminal and in the desktop app"
+    }
+  ]
+}

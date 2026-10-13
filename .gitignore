@@ -1,0 +1,6 @@
+# Written by Claude Code each time it loads the mod: its API types plus the
+# MCP tools connected on this machine. Regenerated on load; never commit it.
+.claude-plugin/types/
+
+.DS_Store
+node_modules/
