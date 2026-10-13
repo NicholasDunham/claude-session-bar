@@ -1,11 +1,28 @@
 {
   "name": "session-bar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A session status band above the prompt (context, 5h/7d limits, repo, model, cost, cache) that works in the terminal and in the desktop app",
-  "author": { "name": "Nicholas Dunham", "url": "https://github.com/NicholasDunham" },
+  "author": {
+    "name": "Nicholas Dunham",
+    "url": "https://github.com/NicholasDunham"
+  },
   "homepage": "https://github.com/NicholasDunham/claude-session-bar",
   "repository": "https://github.com/NicholasDunham/claude-session-bar",
   "license": "MIT",
-  "keywords": ["status line", "statusline", "context", "rate limits", "mod"],
-  "types": "./types/index.d.ts"
+  "keywords": [
+    "status line",
+    "statusline",
+    "context",
+    "rate limits",
+    "mod"
+  ],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "nerdFont": {
+      "type": "boolean",
+      "title": "Nerd Font glyphs",
+      "description": "Use Nerd Font glyphs in the terminal (rounded bar and pill ends, a bolt for the cache rate). Turn on only if your terminal font is a Nerd Font. The desktop app always uses plain shapes.",
+      "default": false
+    }
+  }
 }

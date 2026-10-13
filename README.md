@@ -29,24 +29,37 @@ the Claude desktop app's Code tab**, from the same code.
 
 | Meter | Shows | Note beside it |
 | --- | --- | --- |
-| `Ctx` | How full the context window is | How much the last turn added |
+| `Ctx` | How full the context window is | How much the last turn added, as a share of the window, and the prompt-cache hit rate for the last turn |
 | `5h` | Your 5-hour usage window | Time until it resets |
 | `7d` | Your 7-day usage window | Time until it resets |
 | `spend` | A gateway or Team spend limit, when you have one | Time until it resets |
 
-Each bar turns from green to amber at 50% and to red at 80%. On a wide window
-the meters sit side by side in equal columns; on a narrow one they stack.
-In the terminal the bars are block characters; in the desktop app they're
-drawn as SVG. In the terminal, Claude Code adds a `[-]` control at the right
-of the band that collapses it; the desktop app has no equivalent.
+Each bar is one fixed gradient, green at the start, yellow halfway and red at
+the end, and the fill uncovers it from the left: a fuller bar shows more of it
+and ends in a warmer colour. The percentage beside it takes the colour where
+the fill ends. The last turn's growth (`+6.7%`) sits in a pill that warms from
+green to red as the turn takes a bigger share of the window, and the cache hit
+rate is green from 80%, yellow from 50% and red below.
+
+On a wide window the meters sit side by side, spread across the row with a
+faint dot between each pair; on a narrow one they stack. In the terminal the
+bars are block characters; in the desktop app they're drawn as SVG. In the
+terminal, Claude Code adds a `[-]` control at the right of the band that
+collapses it; the desktop app has no equivalent.
 
 **Details** (the second row):
 
 - **Left:** the repository and branch (or the folder name outside git, and the
   worktree name inside one), then the model, effort level and context window
-  size.
-- **Right:** lines added and removed this session, the session's cost, and the
-  prompt-cache hit rate for the last turn.
+  size. The branch is green when the working tree is clean, and yellow with a
+  `*` when it has uncommitted changes. Each model family has its own colour, and the
+  effort level runs from cool (low) to hot (max).
+- **Right:** lines added and removed this session, then the session's cost in
+  a pill, with the last turn's share beside it (`+$0.25`). The pill is green
+  under $1, then yellow, peach, and red from $20.
+
+The colours follow your Claude Code theme: deeper tones on a light theme, and
+pastels on a dark one or any other (the Catppuccin Latte and Mocha palettes).
 
 Some values only appear once there's something real to show. The band never
 shows saved or guessed numbers:
@@ -101,13 +114,28 @@ The band doesn't replace your status line automatically, so in the terminal
 you'll see both. To keep only the band, remove the `statusLine` entry from
 `~/.claude/settings.json`.
 
+### Nerd Font glyphs
+
+If your terminal font is a [Nerd Font](https://www.nerdfonts.com/), turn on
+the `nerdFont` option for rounded ends on the bars and pills, and a bolt icon
+beside the cache hit rate. It's off by default, because without a Nerd Font
+those glyphs show as boxes or question marks. In a Claude Code session, run:
+
+```
+/plugin configure session-bar@claude-session-bar
+```
+
+Then run `/reload-plugins`. The option only affects the terminal; the desktop
+app always draws plain shapes.
+
 ## Customizing
 
-Everything is in three small files:
+Everything is in four small files:
 
 | File | What to change there |
 | --- | --- |
-| [`hooks/format.ts`](hooks/format.ts) | Colour thresholds, bar widths and spacing, SVG bar colours, number and time formatting, model names |
+| [`hooks/palette.ts`](hooks/palette.ts) | The light and dark palettes, the bar gradient, and the colour thresholds for growth, cost, cache hits, effort, model and branch |
+| [`hooks/format.ts`](hooks/format.ts) | Bar and pill sizes and spacing, number and time formatting, model names |
 | [`hooks/register.tsx`](hooks/register.tsx) | What's shown and in what order, the layout, and how often it refreshes |
 | [`types/index.d.ts`](types/index.d.ts) | The shape of the values the band keeps (update it if you add one) |
 
