@@ -9,10 +9,7 @@ Unlike a [status line](https://docs.claude.com/en/docs/claude-code/statusline),
 which only appears in the terminal, the band draws in **both the terminal and
 the Claude desktop app's Code tab**, from the same code.
 
-```
-Ctx ███░░░░░░░░░░░░░░░░░░░░░  21% +7.6k    5h █████████░░░░░░░░░░░░░░░  39% 2h42m    7d █░░░░░░░░░░░░░░░░░░░░░░░   5% 3d5h
-my-repo:main · Opus 5.5/medium (1M)                                                    +200 −98 · $5.35 · cache 99%
-```
+![The session bar in the Claude desktop app: context, 5h and 7d meters on the first row; repo, branch, model and effort on the left of the second row, with lines changed, cost and cache hit rate on the right](docs/desktop.png)
 
 > [!NOTE]
 > Mods are an **early-access** Claude Code feature, and their API may change
@@ -53,8 +50,10 @@ shows saved or guessed numbers:
 - **Lines changed** counts edits Claude makes with its Edit and Write tools.
   It doesn't count changes made through shell commands, and the count is a
   close estimate rather than an exact diff.
-- **Cost** is Claude Code's list-price estimate. On a subscription it's
-  notional.
+- **Cost** is what the session would cost at API list prices. If you're on a
+  Pro or Max subscription, it's notional: you aren't billed that amount, and
+  your real limits are the 5h and 7d meters. It's a real cost only if you pay
+  per token through the API.
 
 ## Install
 
